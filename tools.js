@@ -18,10 +18,65 @@ import { z } from "zod";
 import { deploy } from './lib/cloud-run-deploy.js';
 import { listServices, getService, getServiceLogs } from './lib/cloud-run-services.js';
 import { listProjects, createProjectAndAttachBilling } from './lib/gcp-projects.js';
+import { startProxy, stopProxy } from './lib/cloud-run-proxy.js';
 import { checkGCP } from './lib/gcp-metadata.js';
 import { ResourceTemplate } from "@modelcontextprotocol/sdk/server/mcp.js";
 
 export const registerTools = (server) => {
+  // Tool to start a Cloud Run proxy
+  server.tool(
+    "start_proxy",
+    "Starts a local proxy for a Cloud Run service.",
+    {
+      project: z.string().describe("Google Cloud project ID"),
+      region: z.string().describe("Region where the service is located").default('europe-west1'),
+      service: z.string().describe("Name of the Cloud Run service"),
+      port: z.number().describe("Local port to listen on").default(8080),
+    },
+    async ({ project, region, service, port }) => {
+      try {
+        const result = await startProxy(project, region, service, port);
+        return {
+          content: [{
+            type: 'text',
+            text: result
+          }]
+        };
+      } catch (error) {
+        return {
+          content: [{
+            type: 'text',
+            text: error.message
+          }]
+        };
+      }
+    }
+  );
+
+  // Tool to stop the Cloud Run proxy
+  server.tool(
+    "stop_proxy",
+    "Stops the local Cloud Run proxy.",
+    async () => {
+      try {
+        const result = await stopProxy();
+        return {
+          content: [{
+            type: 'text',
+            text: result
+          }]
+        };
+      } catch (error) {
+        return {
+          content: [{
+            type: 'text',
+            text: error.message
+          }]
+        };
+      }
+    }
+  );
+
   // Tool to list GCP projects
   server.tool(
     "list_projects",
