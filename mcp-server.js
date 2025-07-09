@@ -25,6 +25,7 @@ import { SSEServerTransport } from "@modelcontextprotocol/sdk/server/sse.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { registerTools, registerToolsRemote } from './tools.js';
 import { checkGCP } from './lib/gcp-metadata.js';
+import 'dotenv/config';
 
 const gcpInfo = await checkGCP();
 
@@ -51,6 +52,12 @@ if(shouldStartStdio()) {
   makeLoggingCompatibleWithStdio();
 };
 
+// Read default configurations from environment variables
+const envProjectId = process.env.GOOGLE_CLOUD_PROJECT || undefined;
+const envRegion = process.env.GOOGLE_CLOUD_REGION; 
+const defaultServiceName = process.env.DEFAULT_SERVICE_NAME; 
+const skipIamCheck = process.env.SKIP_IAM_CHECK !== 'false';
+
 async function getServer () {
   // Create an MCP server with implementation details
   const server = new McpServer({
@@ -58,12 +65,31 @@ async function getServer () {
     version: '1.0.0',
   }, { capabilities: { logging: {} } });
 
+  // Get GCP metadata info once
+  const gcpInfo = await checkGCP();
+
+  // Determine the effective project and region based on priority: Env Var > GCP Metadata > Hardcoded default
+  const effectiveProjectId = envProjectId || (gcpInfo && gcpInfo.project) || undefined;
+  const effectiveRegion = envRegion || (gcpInfo && gcpInfo.region) || 'europe-west1';
+
   if (shouldStartStdio() || !(gcpInfo && gcpInfo.project)) {
     console.log('Using tools optimized for local or stdio mode.');
-    await registerTools(server);
+    // Pass the determined defaults to the local tool registration
+    await registerTools(server, {
+      defaultProjectId: effectiveProjectId,
+      defaultRegion: effectiveRegion,
+      defaultServiceName,
+      skipIamCheck
+    });
   } else {
-    console.log(`Running on GCP project: ${gcpInfo.project}, region: ${gcpInfo.region}. Using tools optimized for remote use.`);
-    await registerToolsRemote(server);
+    console.log(`Running on GCP project: ${effectiveProjectId}, region: ${effectiveRegion}. Using tools optimized for remote use.`);
+    // Pass the determined defaults to the remote tool registration
+    await registerToolsRemote(server, {
+      defaultProjectId: effectiveProjectId,
+      defaultRegion: effectiveRegion,
+      defaultServiceName,
+      skipIamCheck
+    });
   }
 
   return server;
