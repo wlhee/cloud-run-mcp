@@ -13,60 +13,83 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { z } from "zod";
+import { z } from 'zod';
 
 export const registerPrompts = (server) => {
   // Prompts will be registered here.
   server.registerPrompt(
-    "deploy",
+    'deploy',
     {
-      description: "Deploys the current working directory to Cloud Run.",
+      description: 'Deploys the current working directory to Cloud Run.',
       argsSchema: {
-        name: z.string().describe("Name of the Cloud Run service to deploy to.  Defaults to the name of the current directory").optional(),
-        project: z.string().describe("Google Cloud project ID").optional(),
-        region: z.string().describe("Region where the services are located").optional(),
-      }
+        name: z
+          .string()
+          .describe(
+            'Name of the Cloud Run service to deploy to.  Defaults to the name of the current directory'
+          )
+          .optional(),
+        project: z.string().describe('Google Cloud project ID').optional(),
+        region: z
+          .string()
+          .describe('Region where the services are located')
+          .optional(),
+      },
     },
     async ({ name, project, region }) => {
-      const serviceNamePrompt = name || "a name for the application based on the current working directory."
-      const projectPrompt = project ? ` in project ${project}` : "";
-      const regionPrompt = region ? ` in region ${region}` : "";
+      const serviceNamePrompt =
+        name ||
+        'a name for the application based on the current working directory.';
+      const projectPrompt = project ? ` in project ${project}` : '';
+      const regionPrompt = region ? ` in region ${region}` : '';
 
       return {
-        messages: [{
-          role: "user",
-          content: {
-            type: 'text',
-            text: `Use the deploy_local_folder tool to deploy the current folder${projectPrompt}${regionPrompt}. The service name should be ${serviceNamePrompt}`
-          }
-        }]
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: `Use the deploy_local_folder tool to deploy the current folder${projectPrompt}${regionPrompt}. The service name should be ${serviceNamePrompt}`,
+            },
+          },
+        ],
       };
     }
   );
 
   server.registerPrompt(
-    "logs",
+    'logs',
     {
-      description:  "Gets the logs for a Cloud Run service.",
+      description: 'Gets the logs for a Cloud Run service.',
       argsSchema: {
-        service: z.string().describe("Name of the Cloud Run service. Defaults to the name of the current directory.").optional(),
-        project: z.string().describe("Google Cloud project ID").optional(),
-        region: z.string().describe("Region where the services are located").optional(),
-      }
+        service: z
+          .string()
+          .describe(
+            'Name of the Cloud Run service. Defaults to the name of the current directory.'
+          )
+          .optional(),
+        project: z.string().describe('Google Cloud project ID').optional(),
+        region: z
+          .string()
+          .describe('Region where the services are located')
+          .optional(),
+      },
     },
     async ({ service, project, region }) => {
-      const serviceNamePrompt = service || "named for the current working directory"
-      const projectPrompt = project ? ` in project ${project}` : "";
-      const regionPrompt = region ? ` in region ${region}` : "";
+      const serviceNamePrompt =
+        service || 'named for the current working directory';
+      const projectPrompt = project ? ` in project ${project}` : '';
+      const regionPrompt = region ? ` in region ${region}` : '';
 
       return {
-        messages: [{
-          role: "user",
-          content: {
-            type: 'text',
-            text: `Use get_service_log to get logs${projectPrompt}${regionPrompt} for the service ${serviceNamePrompt}`
-          }
-        }]
+        messages: [
+          {
+            role: 'user',
+            content: {
+              type: 'text',
+              text: `Use get_service_log to get logs${projectPrompt}${regionPrompt} for the service ${serviceNamePrompt}`,
+            },
+          },
+        ],
       };
     }
   );
