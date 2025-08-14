@@ -3,7 +3,7 @@ Copyright 2025 Google LLC
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+you may obtain a copy of the License at
 
     https://www.apache.org/licenses/LICENSE-2.0
 
@@ -146,8 +146,7 @@ export const registerTools = (
           .string()
           .describe('Google Cloud project ID')
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .describe('Region where the services are located')
             .default(defaultRegion),
@@ -204,13 +203,11 @@ export const registerTools = (
           .string()
           .describe('Google Cloud project ID containing the service')
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .describe('Region where the service is located')
             .default(defaultRegion),
-        service:
-          z
+        service: z
             .string()
             .describe('Name of the Cloud Run service')
             .default(defaultServiceName),
@@ -276,13 +273,11 @@ export const registerTools = (
           .string()
           .describe('Google Cloud project ID containing the service')
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .describe('Region where the service is located')
             .default(defaultRegion),
-        service:
-          z
+        service: z
             .string()
             .describe('Name of the Cloud Run service')
             .default(defaultServiceName),
@@ -342,23 +337,20 @@ export const registerTools = (
             'Google Cloud project ID. Do not select it yourself, make sure the user provides or confirms the project ID.'
           )
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(defaultRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'),
-        files:
-          z
+        files: z
             .array(z.string())
             .describe(
-              'Array of absolute file paths to deploy (e.g. "/home/user/project/src/index.js", "/home/user/project/package.json")'
+              'Array of absolute file paths to deploy (e.g. ["/home/user/project/src/index.js", "/home/user/project/package.json"])'
             ),
       },
     },
@@ -391,7 +383,7 @@ export const registerTools = (
             content: [
               {
                 type: 'text',
-                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud. google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
+                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud.google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
               },
             ],
           };
@@ -421,20 +413,17 @@ export const registerTools = (
             'Google Cloud project ID. Do not select it yourself, make sure the user provides or confirms the project ID.'
           )
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(defaultRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'),
-        folderPath:
-          z
+        folderPath: z
             .string()
             .describe(
               'Absolute path to the folder to deploy (e.g. "/home/user/project/src")'
@@ -468,7 +457,7 @@ export const registerTools = (
             content: [
               {
                 type: 'text',
-                text: `Cloud Run service ${service} deployed from folder ${folderPath} in project ${project}\nCloud Console: https://console.cloud. google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
+                text: `Cloud Run service ${service} deployed from folder ${folderPath} in project ${project}\nCloud Console: https://console.cloud.google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
               },
             ],
           };
@@ -498,30 +487,25 @@ export const registerTools = (
             'Google Cloud project ID. Leave unset for the app to be deployed in a new project. If provided, make sure the user confirms the project ID they want to deploy to.'
           )
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(defaultRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'),
-        files:
-          z
+        files: z
             .array(
               z.object({
-                filename:
-                  z
+                filename: z
                     .string()
                     .describe(
                       'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
                     ),
-                content: 
-                  z
+                content: z
                     .string()
                     .optional()
                     .describe('Text content of the file'),
@@ -565,7 +549,7 @@ export const registerTools = (
             content: [
               {
                 type: 'text',
-                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud. google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
+                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud.google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
               },
             ],
           };
@@ -638,20 +622,17 @@ export const registerTools = (
             'Google Cloud project ID. Do not select it yourself, make sure the user provides or confirms the project ID.'
           )
           .default(defaultProjectId),
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(defaultRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'),
-        imageUrl:
-          z
+        imageUrl: z
             .string()
             .describe(
               'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
@@ -685,7 +666,7 @@ export const registerTools = (
             content: [
               {
                 type: 'text',
-                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud. google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
+                text: `Cloud Run service ${service} deployed in project ${project}\nCloud Console: https://console.cloud.google.com/run/detail/${region}/${service}?project=${project}\nService URL: ${response.uri}`,
               },
             ],
           };
@@ -772,13 +753,11 @@ export const registerToolsRemote = async (
     {
       description: `Gets details for a specific Cloud Run service in GCP project ${currentProject}.`,
       inputSchema: {
-        region:
-          z
+        region: z
             .string()
             .describe('Region where the service is located')
             .default(currentRegion),
-        service:
-          z
+        service: z
             .string()
             .describe('Name of the Cloud Run service')
             .default(defaultServiceName),
@@ -841,13 +820,11 @@ export const registerToolsRemote = async (
           .string()
           .describe('Google Cloud project ID containing the service')
           .default(currentProject), // Use currentProject
-        region:
-          z
+        region: z
             .string()
             .describe('Region where the service is located')
             .default(currentRegion), // Use currentRegion
-        service:
-          z
+        service: z
             .string()
             .describe('Name of the Cloud Run service')
             .default(defaultServiceName),
@@ -901,24 +878,20 @@ export const registerToolsRemote = async (
     {
       description: `Deploy files to Cloud Run by providing their contents directly to the GCP project ${currentProject}.`,
       inputSchema: {
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(currentRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'), // Use defaultServiceName
-        files:
-          z
+        files: z
             .array(
               z.object({
-                filename:
-                  z
+                filename: z
                     .string()
                     .describe(
                       'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
@@ -931,7 +904,7 @@ export const registerToolsRemote = async (
     },
     gcpTool(gcpCredentialsAvailable, async ({ region, service, files }) => {
       console.log(
-        `New deploy request (remote): ${JSON.stringify({ project: currentProject, region, service, files }) }`
+        `New deploy request (remote): ${JSON.stringify({ project: currentProject, region, service, files })}`
       );
 
       if (
@@ -980,67 +953,21 @@ export const registerToolsRemote = async (
   );
 
   server.registerTool(
-    'run_python_code',
-    {
-      description: 'Runs Python code in a sandboxed environment and returns the output.',
-      inputSchema: {
-        code: z.string().describe('The Python code to execute.'),
-      },
-    },
-    async ({ code }) => {
-      const sandboxUrl = process.env.CODE_SANDBOX_URL;
-      if (!sandboxUrl) {
-        return {
-          content: [
-            {
-              type: 'text',
-              text: 'Error: CODE_SANDBOX_URL environment variable is not set.',
-            },
-          ],
-        };
-      }
-      try {
-        const output = await runCodeInSandbox(code, sandboxUrl);
-        return {
-          content: [
-            {
-              type: 'text',
-              text: output,
-            },
-          ],
-        };
-      } catch (error) {
-        return {
-          content: [
-            {
-              type: 'text',
-              text: `Error running code in sandbox: ${error.message}`,
-            },
-          ],
-        };
-      }
-    }
-  );
-
-  server.registerTool(
     'deploy_container_image',
     {
       description: `Deploys a container image to Cloud Run in the GCP project ${currentProject}. Use this tool if the user provides a container image URL.`,
       inputSchema: {
-        region:
-          z
+        region: z
             .string()
             .optional()
             .default(currentRegion)
             .describe('Region to deploy the service to'),
-        service:
-          z
+        service: z
             .string()
             .optional()
             .default(defaultServiceName)
             .describe('Name of the Cloud Run service to deploy to'),
-        imageUrl:
-          z
+        imageUrl: z
             .string()
             .describe(
               'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
