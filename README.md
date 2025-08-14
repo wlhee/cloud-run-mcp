@@ -31,10 +31,10 @@ Deploy from agent SDKs, like the [Google Gen AI SDK](https://ai.google.dev/gemin
 - `get-service`: Gets details for a specific Cloud Run service.
 - `get-service-log`: Gets Logs and Error Messages for a specific Cloud Run service.
 - `run_python_code`: Runs Python code in a sandboxed environment and returns the output.
-- `deploy-local-files`*: Deploys files from the local file system to a Google Cloud Run service.
-- `deploy-local-folder`*: Deploys a local folder to a Google Cloud Run service.
-- `list-projects`*: Lists available GCP projects.
-- `create-project`*: Creates a new GCP project and attach it to the first available billing account. A project ID can be optionally specified.
+- `deploy-local-files`\*: Deploys files from the local file system to a Google Cloud Run service.
+- `deploy-local-folder`\*: Deploys a local folder to a Google Cloud Run service.
+- `list-projects`\*: Lists available GCP projects.
+- `create-project`\*: Creates a new GCP project and attach it to the first available billing account. A project ID can be optionally specified.
 
 _\* only available when running locally_
 
@@ -130,7 +130,6 @@ mkdir -p ~/.gemini/extensions/cloud-run/gemini-extension && \
 ```
 
 ## Use as remote MCP server
-
 
 > [!WARNING]  
 > Do not use the remote MCP server without authentication. In the following instructions, we will use IAM authentication to secure the connection to the MCP server from your local machine. This is important to prevent unauthorized access to your Google Cloud resources.

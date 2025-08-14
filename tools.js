@@ -147,9 +147,9 @@ export const registerTools = (
           .describe('Google Cloud project ID')
           .default(defaultProjectId),
         region: z
-            .string()
-            .describe('Region where the services are located')
-            .default(defaultRegion),
+          .string()
+          .describe('Region where the services are located')
+          .default(defaultRegion),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ project, region }) => {
@@ -204,13 +204,13 @@ export const registerTools = (
           .describe('Google Cloud project ID containing the service')
           .default(defaultProjectId),
         region: z
-            .string()
-            .describe('Region where the service is located')
-            .default(defaultRegion),
+          .string()
+          .describe('Region where the service is located')
+          .default(defaultRegion),
         service: z
-            .string()
-            .describe('Name of the Cloud Run service')
-            .default(defaultServiceName),
+          .string()
+          .describe('Name of the Cloud Run service')
+          .default(defaultServiceName),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ project, region, service }) => {
@@ -274,13 +274,13 @@ export const registerTools = (
           .describe('Google Cloud project ID containing the service')
           .default(defaultProjectId),
         region: z
-            .string()
-            .describe('Region where the service is located')
-            .default(defaultRegion),
+          .string()
+          .describe('Region where the service is located')
+          .default(defaultRegion),
         service: z
-            .string()
-            .describe('Name of the Cloud Run service')
-            .default(defaultServiceName),
+          .string()
+          .describe('Name of the Cloud Run service')
+          .default(defaultServiceName),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ project, region, service }) => {
@@ -338,20 +338,20 @@ export const registerTools = (
           )
           .default(defaultProjectId),
         region: z
-            .string()
-            .optional()
-            .default(defaultRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(defaultRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'),
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'),
         files: z
-            .array(z.string())
-            .describe(
-              'Array of absolute file paths to deploy (e.g. ["/home/user/project/src/index.js", "/home/user/project/package.json"])'
-            ),
+          .array(z.string())
+          .describe(
+            'Array of absolute file paths to deploy (e.g. ["/home/user/project/src/index.js", "/home/user/project/package.json"])'
+          ),
       },
     },
     gcpTool(
@@ -414,20 +414,20 @@ export const registerTools = (
           )
           .default(defaultProjectId),
         region: z
-            .string()
-            .optional()
-            .default(defaultRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(defaultRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'),
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'),
         folderPath: z
-            .string()
-            .describe(
-              'Absolute path to the folder to deploy (e.g. "/home/user/project/src")'
-            ),
+          .string()
+          .describe(
+            'Absolute path to the folder to deploy (e.g. "/home/user/project/src")'
+          ),
       },
     },
     gcpTool(
@@ -488,30 +488,30 @@ export const registerTools = (
           )
           .default(defaultProjectId),
         region: z
-            .string()
-            .optional()
-            .default(defaultRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(defaultRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'),
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'),
         files: z
-            .array(
-              z.object({
-                filename: z
-                    .string()
-                    .describe(
-                      'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
-                    ),
-                content: z
-                    .string()
-                    .optional()
-                    .describe('Text content of the file'),
-              })
-            )
-            .describe('Array of file objects containing filename and content'),
+          .array(
+            z.object({
+              filename: z
+                .string()
+                .describe(
+                  'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
+                ),
+              content: z
+                .string()
+                .optional()
+                .describe('Text content of the file'),
+            })
+          )
+          .describe('Array of file objects containing filename and content'),
       },
     },
     gcpTool(
@@ -570,7 +570,8 @@ export const registerTools = (
   server.registerTool(
     'run_python_code',
     {
-      description: 'Runs Python code in a sandboxed environment and returns the output.',
+      description:
+        'Runs Python code in a sandboxed environment and returns the output.',
       inputSchema: {
         code: z.string().describe('The Python code to execute.'),
       },
@@ -623,20 +624,20 @@ export const registerTools = (
           )
           .default(defaultProjectId),
         region: z
-            .string()
-            .optional()
-            .default(defaultRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(defaultRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'),
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'),
         imageUrl: z
-            .string()
-            .describe(
-              'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
-            ),
+          .string()
+          .describe(
+            'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
+          ),
       },
     },
     gcpTool(
@@ -754,13 +755,13 @@ export const registerToolsRemote = async (
       description: `Gets details for a specific Cloud Run service in GCP project ${currentProject}.`,
       inputSchema: {
         region: z
-            .string()
-            .describe('Region where the service is located')
-            .default(currentRegion),
+          .string()
+          .describe('Region where the service is located')
+          .default(currentRegion),
         service: z
-            .string()
-            .describe('Name of the Cloud Run service')
-            .default(defaultServiceName),
+          .string()
+          .describe('Name of the Cloud Run service')
+          .default(defaultServiceName),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ region, service }) => {
@@ -821,13 +822,13 @@ export const registerToolsRemote = async (
           .describe('Google Cloud project ID containing the service')
           .default(currentProject), // Use currentProject
         region: z
-            .string()
-            .describe('Region where the service is located')
-            .default(currentRegion), // Use currentRegion
+          .string()
+          .describe('Region where the service is located')
+          .default(currentRegion), // Use currentRegion
         service: z
-            .string()
-            .describe('Name of the Cloud Run service')
-            .default(defaultServiceName),
+          .string()
+          .describe('Name of the Cloud Run service')
+          .default(defaultServiceName),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ project, region, service }) => {
@@ -879,27 +880,27 @@ export const registerToolsRemote = async (
       description: `Deploy files to Cloud Run by providing their contents directly to the GCP project ${currentProject}.`,
       inputSchema: {
         region: z
-            .string()
-            .optional()
-            .default(currentRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(currentRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'), // Use defaultServiceName
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'), // Use defaultServiceName
         files: z
-            .array(
-              z.object({
-                filename: z
-                    .string()
-                    .describe(
-                      'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
-                    ),
-                content: z.string().describe('Text content of the file'),
-              })
-            )
-            .describe('Array of file objects containing filename and content'),
+          .array(
+            z.object({
+              filename: z
+                .string()
+                .describe(
+                  'Name and path of the file (e.g. "src/index.js" or "data/config.json")'
+                ),
+              content: z.string().describe('Text content of the file'),
+            })
+          )
+          .describe('Array of file objects containing filename and content'),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ region, service, files }) => {
@@ -958,20 +959,20 @@ export const registerToolsRemote = async (
       description: `Deploys a container image to Cloud Run in the GCP project ${currentProject}. Use this tool if the user provides a container image URL.`,
       inputSchema: {
         region: z
-            .string()
-            .optional()
-            .default(currentRegion)
-            .describe('Region to deploy the service to'),
+          .string()
+          .optional()
+          .default(currentRegion)
+          .describe('Region to deploy the service to'),
         service: z
-            .string()
-            .optional()
-            .default(defaultServiceName)
-            .describe('Name of the Cloud Run service to deploy to'),
+          .string()
+          .optional()
+          .default(defaultServiceName)
+          .describe('Name of the Cloud Run service to deploy to'),
         imageUrl: z
-            .string()
-            .describe(
-              'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
-            ),
+          .string()
+          .describe(
+            'The URL of the container image to deploy (e.g. "gcr.io/cloudrun/hello")'
+          ),
       },
     },
     gcpTool(gcpCredentialsAvailable, async ({ region, service, imageUrl }) => {
