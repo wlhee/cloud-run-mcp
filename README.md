@@ -31,12 +31,12 @@ Deploy from agent SDKs, like the [Google Gen AI SDK](https://ai.google.dev/gemin
 - `get-service`: Gets details for a specific Cloud Run service.
 - `get-service-log`: Gets Logs and Error Messages for a specific Cloud Run service.
 - `run_python_code`: Runs Python code in a sandboxed environment and returns the output.
-- `deploy-local-files`\*: Deploys files from the local file system to a Google Cloud Run service.
-- `deploy-local-folder`\*: Deploys a local folder to a Google Cloud Run service.
-- `list-projects`\*: Lists available GCP projects.
-- `create-project`\*: Creates a new GCP project and attach it to the first available billing account. A project ID can be optionally specified.
+- `deploy-local-files`*: Deploys files from the local file system to a Google Cloud Run service.
+- `deploy-local-folder`*: Deploys a local folder to a Google Cloud Run service.
+- `list-projects`*: Lists available GCP projects.
+- `create-project`*: Creates a new GCP project and attach it to the first available billing account. A project ID can be optionally specified.
 
-_\* only available when running locally_
+_* only available when running locally_
 
 ## Prompts
 
@@ -119,6 +119,22 @@ See Docker's [MCP catalog](https://hub.docker.com/mcp/server/cloud-run-mcp/overv
       }
    ```
 
+### Using the `run_python_code` tool
+
+To use the `run_python_code` tool, you need to deploy a code sandbox service to your Google Cloud project. You can use the `wlhee/cloud-run-sandbox` repository to deploy the sandbox.
+
+Then, you need to configure the MCP server with the URL of the sandbox service. You can do this by setting the `CODE_SANDBOX_URL` environment variable in your MCP client configuration:
+
+```json
+   "cloud-run": {
+      "command": "npx",
+      "args": ["-y", "https://github.com/GoogleCloudPlatform/cloud-run-mcp"],
+      "env": {
+            "CODE_SANDBOX_URL": "YOUR_SANDBOX_URL"
+      }
+   }
+```
+
 ## Use as a Gemini CLI extension
 
 To install this as a [Gemini CLI](https://github.com/google-gemini/gemini-cli) extension, run the following command:
@@ -130,6 +146,7 @@ mkdir -p ~/.gemini/extensions/cloud-run/gemini-extension && \
 ```
 
 ## Use as remote MCP server
+
 
 > [!WARNING]  
 > Do not use the remote MCP server without authentication. In the following instructions, we will use IAM authentication to secure the connection to the MCP server from your local machine. This is important to prevent unauthorized access to your Google Cloud resources.
